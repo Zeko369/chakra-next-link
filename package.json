@@ -11,7 +11,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch",
+    "dev": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
@@ -20,6 +20,8 @@
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
+    "@chakra-ui/core": ">=1.0.0-rc.3",
+    "next": ">=9",
     "react": ">=16"
   },
   "husky": {
@@ -47,10 +49,12 @@
     }
   ],
   "devDependencies": {
+    "@chakra-ui/core": "^1.0.0-rc.3",
     "@size-limit/preset-small-lib": "^4.6.0",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "husky": "^4.3.0",
+    "next": "^9.5.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "size-limit": "^4.6.0",
