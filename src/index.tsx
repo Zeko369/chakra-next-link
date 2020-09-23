@@ -1,50 +1,23 @@
 import * as React from 'react';
-import {
-  Link as ChakraLink,
-  LinkProps as ChakraLinkProps,
-  Button,
-  ButtonProps as ChakraButtonProps,
-  IconButton,
-  IconButtonProps as ChakraButtonIconProps,
-} from '@chakra-ui/core';
 import { useRouter } from 'next/router';
-import NextLink from 'next/link';
+import { Link as ChakraLink, Button, IconButton } from '@chakra-ui/core';
 
-export type LinkProps = Omit<ChakraLinkProps, 'as'> & {
-  as?: string;
-  href: string;
-};
-
-const external = (href: string) => href.startsWith('http');
-
-const LinkingComponent: React.FC<{ as?: string; href: string }> = ({
-  as,
-  href,
-  children,
-}) => {
-  if (!as && external(href)) {
-    return <>{children}</>;
-  }
-
-  return (
-    <NextLink href={href} passHref as={as}>
-      {children}
-    </NextLink>
-  );
-};
+import { LinkingComponent, external } from './LinkingComponent';
+import { LinkProps, LinkButtonProps, LinkButtonIconProps } from './types';
 
 const useIsActive = (href: string) => {
   const { pathname } = useRouter();
   return pathname === href;
 };
 
-export const Link: React.FC<LinkProps> = ({ as, href, children, ...props }) => {
+export const Link: React.FC<LinkProps> = props => {
+  const { as, href, children, ...rest } = props;
   const isActive = useIsActive(href);
 
   return (
-    <LinkingComponent href={href} as={as} {...props}>
+    <LinkingComponent href={href} as={as} {...rest}>
       <ChakraLink
-        {...props}
+        {...rest}
         isExternal={!as && external(href)}
         aria-current={isActive ? 'page' : undefined}
       >
@@ -54,50 +27,28 @@ export const Link: React.FC<LinkProps> = ({ as, href, children, ...props }) => {
   );
 };
 
-export interface LinkButtonProps extends Omit<ChakraButtonProps, 'as'> {
-  href: string;
-  as?: string;
-}
-
-export const LinkButton: React.FC<LinkButtonProps> = ({
-  as,
-  href,
-  children,
-  ...props
-}) => {
+export const LinkButton: React.FC<LinkButtonProps> = props => {
+  const { as, href, children, ...rest } = props;
   const isActive = useIsActive(href);
 
   return (
-    <NextLink href={href} passHref as={as}>
+    <LinkingComponent href={href} as={as} {...rest}>
       <Button as="a" {...props} aria-current={isActive ? 'page' : undefined}>
         {children}
       </Button>
-    </NextLink>
+    </LinkingComponent>
   );
 };
 
-export interface LinkButtonIconProps extends Omit<ChakraButtonIconProps, 'as'> {
-  href: string;
-  as?: string;
-}
-
-export const LinkIconButton: React.FC<LinkButtonIconProps> = ({
-  as,
-  href,
-  children,
-  ...props
-}) => {
+export const LinkIconButton: React.FC<LinkButtonIconProps> = props => {
+  const { as, href, children, ...rest } = props;
   const isActive = useIsActive(href);
 
   return (
-    <NextLink href={href} passHref as={as}>
-      <IconButton
-        as="a"
-        {...props}
-        aria-current={isActive ? 'page' : undefined}
-      >
+    <LinkingComponent href={href} as={as} {...rest}>
+      <IconButton as="a" {...rest} aria-current={isActive ? 'page' : undefined}>
         {children}
       </IconButton>
-    </NextLink>
+    </LinkingComponent>
   );
 };
