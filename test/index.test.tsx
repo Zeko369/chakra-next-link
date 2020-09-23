@@ -2,6 +2,17 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Link, LinkButton, LinkIconButton } from '../src';
 
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+    };
+  },
+}));
+
 describe('it', () => {
   const baseProps = { href: '/foo' };
 
