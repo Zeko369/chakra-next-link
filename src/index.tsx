@@ -9,9 +9,10 @@ import {
 } from '@chakra-ui/core';
 import NextLink from 'next/link';
 
-export interface LinkProps extends Omit<ChakraLinkProps, 'as'> {
+export type LinkProps = Omit<ChakraLinkProps, 'as'> & {
   as?: string;
-}
+  href: string;
+};
 
 const LinkingComponent: React.FC<{ as?: string; href: string }> = ({
   as,
@@ -36,8 +37,7 @@ const LinkingComponent: React.FC<{ as?: string; href: string }> = ({
 
 export const Link: React.FC<LinkProps> = ({ as, href, children, ...props }) => {
   return (
-    // fix this
-    <LinkingComponent href={href || ''} as={as} {...props}>
+    <LinkingComponent href={href} as={as} {...props}>
       <ChakraLink {...props}>{children}</ChakraLink>
     </LinkingComponent>
   );
