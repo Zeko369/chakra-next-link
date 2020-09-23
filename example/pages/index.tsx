@@ -1,25 +1,31 @@
 import React from 'react';
-import { Container, HStack, Stack } from '@chakra-ui/core';
-import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { Container, HStack, VStack } from '@chakra-ui/core';
+import { ExternalLinkIcon, SearchIcon } from '@chakra-ui/icons';
 import { NextPage } from 'next';
 
 import { Link, LinkButton, LinkIconButton } from '../../dist';
 
+const Row: React.FC<{ href: string; label: string }> = ({ href, label }) => {
+  return (
+    <HStack>
+      <Link href={href}>{label}</Link>
+      <LinkButton href={href}>{label}</LinkButton>
+      <LinkIconButton
+        href={href}
+        aria-label={label}
+        icon={<ExternalLinkIcon />}
+      />
+    </HStack>
+  );
+};
+
 const Home: NextPage = () => {
   return (
-    <Container mt="4">
-      <HStack>
-        <Link href="/other">To other page</Link>
-        <LinkButton href="/other">To other page</LinkButton>
-        <LinkIconButton
-          href="/other"
-          aria-label="other page"
-          icon={<ExternalLinkIcon />}
-        >
-          To other page
-        </LinkIconButton>
-      </HStack>
-    </Container>
+    <VStack p="4" alignItems="flex-start">
+      <Row href="/other" label="other" />
+      <Row href="/" label="this" />
+      <Row href="https://google.com" label="google" />
+    </VStack>
   );
 };
 

@@ -7,6 +7,7 @@ import {
   IconButton,
   IconButtonProps as ChakraButtonIconProps,
 } from '@chakra-ui/core';
+import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 
 export type LinkProps = Omit<ChakraLinkProps, 'as'> & {
@@ -14,18 +15,15 @@ export type LinkProps = Omit<ChakraLinkProps, 'as'> & {
   href: string;
 };
 
+const external = (href: string) => href.startsWith('http');
+
 const LinkingComponent: React.FC<{ as?: string; href: string }> = ({
   as,
   href,
   children,
-  ...props
 }) => {
-  if (!as && href.startsWith('http')) {
-    return (
-      <a href={href} {...props}>
-        {children}
-      </a>
-    );
+  if (!as && external(href)) {
+    return <>{children}</>;
   }
 
   return (
@@ -35,10 +33,23 @@ const LinkingComponent: React.FC<{ as?: string; href: string }> = ({
   );
 };
 
+const useIsActive = (href: string) => {
+  const { pathname } = useRouter();
+  return pathname === href;
+};
+
 export const Link: React.FC<LinkProps> = ({ as, href, children, ...props }) => {
+  const isActive = useIsActive(href);
+
   return (
     <LinkingComponent href={href} as={as} {...props}>
-      <ChakraLink {...props}>{children}</ChakraLink>
+      <ChakraLink
+        {...props}
+        isExternal={!as && external(href)}
+        aria-current={isActive ? 'page' : undefined}
+      >
+        {children}
+      </ChakraLink>
     </LinkingComponent>
   );
 };
@@ -54,9 +65,11 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
   children,
   ...props
 }) => {
+  const isActive = useIsActive(href);
+
   return (
     <NextLink href={href} passHref as={as}>
-      <Button as="a" {...props}>
+      <Button as="a" {...props} aria-current={isActive ? 'page' : undefined}>
         {children}
       </Button>
     </NextLink>
@@ -74,9 +87,15 @@ export const LinkIconButton: React.FC<LinkButtonIconProps> = ({
   children,
   ...props
 }) => {
+  const isActive = useIsActive(href);
+
   return (
     <NextLink href={href} passHref as={as}>
-      <IconButton as="a" {...props}>
+      <IconButton
+        as="a"
+        {...props}
+        aria-current={isActive ? 'page' : undefined}
+      >
         {children}
       </IconButton>
     </NextLink>
