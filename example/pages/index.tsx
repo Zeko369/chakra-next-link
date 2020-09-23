@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, HStack, VStack } from '@chakra-ui/core';
+import { Container, Heading, HStack, VStack } from '@chakra-ui/core';
 import { ExternalLinkIcon, SearchIcon } from '@chakra-ui/icons';
 import { NextPage } from 'next';
 
@@ -22,8 +22,9 @@ const Row: React.FC<{ href: string; label: string }> = ({ href, label }) => {
 const Home: NextPage = () => {
   return (
     <VStack p="4" alignItems="flex-start">
-      <Row href="/other" label="other" />
+      <Heading>Different types of links</Heading>
       <Row href="/" label="this" />
+      <Row href="/other" label="other" />
       <Row href="https://google.com" label="google" />
     </VStack>
   );
