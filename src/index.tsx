@@ -6,8 +6,8 @@ import { LinkingComponent, external } from './LinkingComponent';
 import { LinkProps, LinkButtonProps, LinkButtonIconProps } from './types';
 
 const useIsActive = (href: string) => {
-  const { pathname } = useRouter();
-  return pathname === href;
+  const router = useRouter();
+  return router && router.pathname === href;
 };
 
 export const Link: React.FC<LinkProps> = props => {
