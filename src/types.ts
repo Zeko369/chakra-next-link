@@ -4,16 +4,16 @@ import {
   IconButtonProps as ChakraButtonIconProps,
 } from '@chakra-ui/core';
 
-export type LinkProps = Omit<ChakraLinkProps, 'as'> & {
-  as?: string;
+export type LinkProps = ChakraLinkProps & {
+  nextAs?: string;
   href: string;
 };
 
-export interface LinkButtonProps extends Omit<ChakraButtonProps, 'as'> {
+export interface LinkButtonProps extends ChakraButtonProps {
   href: string;
-  as?: string;
+  nextAs?: string;
 }
-export interface LinkButtonIconProps extends Omit<ChakraButtonIconProps, 'as'> {
+export interface LinkButtonIconProps extends ChakraButtonIconProps {
   href: string;
-  as?: string;
+  nextAs?: string;
 }
