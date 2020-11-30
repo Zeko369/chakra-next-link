@@ -12,7 +12,7 @@ const Other: NextPage = () => {
     }, 500);
 
     return () => clearTimeout(timeout);
-  }, []);
+  }, [router]);
 
   return <Heading>Other page, ... redirecting back</Heading>;
 };
