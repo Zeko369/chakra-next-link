@@ -5,10 +5,10 @@ import { NextPage } from 'next';
 
 import { Link, LinkButton, LinkIconButton } from '../../dist';
 
-const Row: React.FC<{ href: string; label: string; other?: any }> = ({
+const Row: React.FC<{ href?: string; label: string; other?: any }> = ({
   href,
   label,
-  other,
+  other
 }) => {
   return (
     <HStack>
@@ -40,6 +40,10 @@ const Home: NextPage = () => {
       />
       <Row href="/other" label="other" />
       <Row href="https://google.com" label="google" />
+      <Row
+        label="This is just a button link"
+        other={{ onClick: () => alert('click') }}
+      />
     </VStack>
   );
 };
