@@ -4,7 +4,6 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { NextPage } from 'next';
 
 import { Link, LinkButton, LinkIconButton } from '../../dist';
-import NextLink from 'next/link';
 
 const Row: React.FC<{ href?: string; label: string; other?: any }> = ({
   href,
