@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import { Link as ChakraLink, Button, IconButton } from '@chakra-ui/react';
+import {
+  Link as ChakraLink,
+  Button,
+  IconButton,
+  ButtonProps
+} from '@chakra-ui/react';
 
-import { LinkingComponent, external } from './LinkingComponent';
+import { LinkingComponent, external, Url } from './LinkingComponent';
 import { LinkProps, LinkButtonProps, LinkButtonIconProps } from './types';
 
 const useIsActive = (href?: string) => {
@@ -15,6 +20,17 @@ const useIsActive = (href?: string) => {
   return router && router.pathname === href;
 };
 
+const asHelper = (
+  href?: Url,
+  defaultVal: ButtonProps['as'] = 'a'
+): ButtonProps['as'] => {
+  if (!href) {
+    return 'button';
+  }
+
+  return defaultVal;
+};
+
 export const Link: React.FC<LinkProps> = (props) => {
   const { nextAs, href, children, linkProps, ...rest } = props;
   const isActive = useIsActive(href);
@@ -22,6 +38,7 @@ export const Link: React.FC<LinkProps> = (props) => {
   return (
     <LinkingComponent href={href} as={nextAs} {...linkProps}>
       <ChakraLink
+        as={asHelper(href)}
         {...rest}
         isExternal={!nextAs && external(href)}
         aria-current={isActive ? 'page' : undefined}
@@ -38,7 +55,11 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
 
   return (
     <LinkingComponent href={href} as={nextAs} {...linkProps}>
-      <Button as="a" {...rest} aria-current={isActive ? 'page' : undefined}>
+      <Button
+        as={asHelper(href)}
+        {...rest}
+        aria-current={isActive ? 'page' : undefined}
+      >
         {children}
       </Button>
     </LinkingComponent>
@@ -51,7 +72,11 @@ export const LinkIconButton: React.FC<LinkButtonIconProps> = (props) => {
 
   return (
     <LinkingComponent href={href} as={nextAs} {...linkProps}>
-      <IconButton as="a" {...rest} aria-current={isActive ? 'page' : undefined}>
+      <IconButton
+        as={asHelper(href)}
+        {...rest}
+        aria-current={isActive ? 'page' : undefined}
+      >
         {children}
       </IconButton>
     </LinkingComponent>

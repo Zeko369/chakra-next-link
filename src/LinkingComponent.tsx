@@ -2,8 +2,7 @@ import React from 'react';
 import NextLink, { LinkProps } from 'next/link';
 import { UrlObject } from 'url';
 
-type Url = string | UrlObject;
-
+export type Url = string | UrlObject;
 export const external = (url?: Url) => {
   if (!url) {
     return false;
