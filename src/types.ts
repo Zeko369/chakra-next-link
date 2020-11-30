@@ -16,6 +16,7 @@ type JustLink = { justLink: true };
 type ChakraSpecific = {
   isDisabled?: boolean;
   justLink?: false;
+  noUnderline?: boolean;
 };
 
 type Props<T> = BaseProps & ((ChakraSpecific & T) | JustLink);
