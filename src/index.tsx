@@ -5,8 +5,13 @@ import { Link as ChakraLink, Button, IconButton } from '@chakra-ui/react';
 import { LinkingComponent, external } from './LinkingComponent';
 import { LinkProps, LinkButtonProps, LinkButtonIconProps } from './types';
 
-const useIsActive = (href: string) => {
+const useIsActive = (href?: string) => {
   const router = useRouter();
+
+  if (!href) {
+    return false;
+  }
+
   return router && router.pathname === href;
 };
 

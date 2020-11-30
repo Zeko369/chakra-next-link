@@ -4,11 +4,22 @@ import { UrlObject } from 'url';
 
 type Url = string | UrlObject;
 
-export const external = (href: Url) => href.toString().startsWith('http');
-export const LinkingComponent: React.FC<LinkProps> = (props) => {
+export const external = (url?: Url) => {
+  if (!url) {
+    return false;
+  }
+
+  return url.toString().startsWith('http');
+};
+
+export interface LinkingComponentProps extends Omit<LinkProps, 'href'> {
+  href?: Url;
+}
+
+export const LinkingComponent: React.FC<LinkingComponentProps> = (props) => {
   const { as, href, children } = props;
 
-  if (!as && external(href)) {
+  if (href === undefined || (!as && external(href))) {
     return <>{children}</>;
   }
 

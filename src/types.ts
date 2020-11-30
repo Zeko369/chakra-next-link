@@ -7,7 +7,7 @@ import { LinkProps as NextLinkProps } from 'next/link';
 
 export type BaseProps = {
   linkProps?: NextLinkProps;
-  href: string;
+  href?: string;
   nextAs?: string;
 };
 
