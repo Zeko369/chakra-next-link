@@ -39,8 +39,9 @@ export const Link: React.FC<LinkProps> = (props) => {
     <LinkingComponent href={href} as={nextAs} {...linkProps}>
       <ChakraLink
         as={asHelper(href)}
-        {...rest}
+        href={href}
         isExternal={!nextAs && external(href)}
+        {...rest}
         aria-current={isActive ? 'page' : undefined}
       >
         {children}
@@ -57,8 +58,9 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
     <LinkingComponent href={href} as={nextAs} {...linkProps}>
       <Button
         as={asHelper(href)}
-        {...rest}
+        href={href}
         aria-current={isActive ? 'page' : undefined}
+        {...rest}
       >
         {children}
       </Button>
@@ -74,8 +76,9 @@ export const LinkIconButton: React.FC<LinkButtonIconProps> = (props) => {
     <LinkingComponent href={href} as={nextAs} {...linkProps}>
       <IconButton
         as={asHelper(href)}
-        {...rest}
+        href={href}
         aria-current={isActive ? 'page' : undefined}
+        {...rest}
       >
         {children}
       </IconButton>
