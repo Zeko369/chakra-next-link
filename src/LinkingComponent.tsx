@@ -1,12 +1,13 @@
 import React from 'react';
-import NextLink from 'next/link';
+import NextLink, { LinkProps } from 'next/link';
+import { UrlObject } from 'url';
 
-export const external = (href: string) => href.startsWith('http');
-export const LinkingComponent: React.FC<{ as?: string; href: string }> = ({
-  as,
-  href,
-  children,
-}) => {
+type Url = string | UrlObject;
+
+export const external = (href: Url) => href.toString().startsWith('http');
+export const LinkingComponent: React.FC<LinkProps> = (props) => {
+  const { as, href, children } = props;
+
   if (!as && external(href)) {
     return <>{children}</>;
   }

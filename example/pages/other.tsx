@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Heading } from '@chakra-ui/core';
+import { Heading } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 

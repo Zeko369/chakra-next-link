@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Heading, HStack, VStack } from '@chakra-ui/core';
-import { ExternalLinkIcon, SearchIcon } from '@chakra-ui/icons';
+import { Heading, HStack, VStack } from '@chakra-ui/react';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { NextPage } from 'next';
 
 import { Link, LinkButton, LinkIconButton } from '../../dist';
