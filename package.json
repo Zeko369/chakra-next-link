@@ -1,7 +1,7 @@
 {
   "name": "chakra-next-link",
   "author": "Fran Zekan",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
