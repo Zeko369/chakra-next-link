@@ -32,33 +32,47 @@ const asHelper = (
 };
 
 export const Link: React.FC<LinkProps> = (props) => {
-  const { nextAs, href, children, linkProps, ...rest } = props;
+  const { nextAs, href, children, linkProps, justLink, ...rest } = props;
   const isActive = useIsActive(href);
 
   return (
-    <LinkingComponent href={href} as={nextAs} {...linkProps}>
-      <ChakraLink
-        as={asHelper(href)}
-        href={href}
-        isExternal={!nextAs && external(href)}
-        {...rest}
-        aria-current={isActive ? 'page' : undefined}
-      >
-        {children}
-      </ChakraLink>
+    <LinkingComponent
+      href={href}
+      as={nextAs}
+      justLink={justLink}
+      isExternal={(rest as any).isExternal}
+      {...linkProps}
+    >
+      {justLink ? (
+        children
+      ) : (
+        <ChakraLink
+          as={asHelper(href)}
+          href={href}
+          isExternal={(rest as any).isExternal || (!nextAs && external(href))}
+          {...rest}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          {children}
+        </ChakraLink>
+      )}
     </LinkingComponent>
   );
 };
 
 export const LinkButton: React.FC<LinkButtonProps> = (props) => {
-  const { nextAs, href, children, linkProps, ...rest } = props;
+  const { nextAs, href, children, linkProps, isExternal, ...rest } = props;
   const isActive = useIsActive(href);
 
   return (
-    <LinkingComponent href={href} as={nextAs} {...linkProps}>
+    <LinkingComponent
+      isExternal={isExternal}
+      href={href}
+      as={nextAs}
+      {...linkProps}
+    >
       <Button
         as={asHelper(href)}
-        href={href}
         aria-current={isActive ? 'page' : undefined}
         {...rest}
       >
@@ -69,14 +83,19 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
 };
 
 export const LinkIconButton: React.FC<LinkButtonIconProps> = (props) => {
-  const { nextAs, href, children, linkProps, ...rest } = props;
+  const { nextAs, href, children, linkProps, isExternal, ...rest } = props;
   const isActive = useIsActive(href);
 
   return (
-    <LinkingComponent href={href} as={nextAs} {...linkProps}>
+    <LinkingComponent
+      isExternal={isExternal}
+      href={href}
+      as={nextAs}
+      {...linkProps}
+    >
       <IconButton
         as={asHelper(href)}
-        href={href}
+        // ADD DISABLED
         aria-current={isActive ? 'page' : undefined}
         {...rest}
       >

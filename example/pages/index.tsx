@@ -1,9 +1,10 @@
 import React from 'react';
-import { Heading, HStack, VStack } from '@chakra-ui/react';
+import { Box, Heading, HStack, VStack, Text } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { NextPage } from 'next';
 
 import { Link, LinkButton, LinkIconButton } from '../../dist';
+import NextLink from 'next/link';
 
 const Row: React.FC<{ href?: string; label: string; other?: any }> = ({
   href,
@@ -44,6 +45,24 @@ const Home: NextPage = () => {
         label="This is just a button link"
         other={{ onClick: () => alert('click') }}
       />
+      <HStack>
+        <Link href="/other" justLink>
+          <Box shadow="md" borderRadius="md" p="5" cursor="pointer">
+            <Heading>Hello</Heading>
+            <Text>World</Text>
+          </Box>
+        </Link>
+        <Link href="https://google.com" justLink>
+          <Box shadow="md" borderRadius="md" p="5" cursor="pointer">
+            <Heading>Google</Heading>
+          </Box>
+        </Link>
+        <Link href="https://google.com" justLink isExternal={false}>
+          <Box shadow="md" borderRadius="md" p="5" cursor="pointer">
+            <Heading>Google but same tab</Heading>
+          </Box>
+        </Link>
+      </HStack>
     </VStack>
   );
 };

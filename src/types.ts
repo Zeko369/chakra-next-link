@@ -9,8 +9,19 @@ export type BaseProps = {
   linkProps?: NextLinkProps;
   href?: string;
   nextAs?: string;
+  isExternal?: boolean;
 };
 
-export type LinkProps = ChakraLinkProps & BaseProps;
-export type LinkButtonProps = ChakraButtonProps & BaseProps;
-export type LinkButtonIconProps = ChakraButtonIconProps & BaseProps;
+type JustLink = { justLink: true };
+type ChakraSpecific = {
+  isDisabled?: boolean;
+  justLink?: false;
+};
+
+type Props<T> = BaseProps & ((ChakraSpecific & T) | JustLink);
+
+export type LinkProps = Props<ChakraLinkProps>;
+export type LinkButtonProps = ChakraButtonProps & ChakraSpecific & BaseProps;
+export type LinkButtonIconProps = ChakraButtonIconProps &
+  ChakraSpecific &
+  BaseProps;
