@@ -43,7 +43,7 @@ export const Link: React.FC<LinkProps> = (props) => {
       isExternal={(rest as any).isExternal}
       {...((rest as any).noUnderline && {
         _hover: {
-          textDecoration: 'none'
+          textDecoration: 'none !important'
         }
       })}
       {...linkProps}
