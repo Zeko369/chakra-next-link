@@ -41,11 +41,6 @@ export const Link: React.FC<LinkProps> = (props) => {
       as={nextAs}
       justLink={justLink}
       isExternal={(rest as any).isExternal}
-      {...((rest as any).noUnderline && {
-        _hover: {
-          textDecoration: 'none !important'
-        }
-      })}
       {...linkProps}
     >
       {justLink ? (
@@ -55,6 +50,11 @@ export const Link: React.FC<LinkProps> = (props) => {
           as={asHelper(href)}
           href={href}
           isExternal={(rest as any).isExternal || (!nextAs && external(href))}
+          {...((rest as any).noUnderline && {
+            _hover: {
+              textDecoration: 'none !important'
+            }
+          })}
           {...rest}
           aria-current={isActive ? 'page' : undefined}
         >
