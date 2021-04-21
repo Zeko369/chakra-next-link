@@ -21,19 +21,15 @@ export const LinkingComponent: React.FC<LinkingComponentProps> = (props) => {
   const { as, href, children, justLink, isExternal } = props;
 
   if (href === undefined || (!as && external(href)) || isExternal) {
-    if (justLink) {
-      const props = {
-        href: (as || href)?.toString(),
-        ...(isExternal !== false && {
-          target: '_blank',
-          rel: 'noopener noreferrer'
-        })
-      };
+    const props = {
+      href: (as || href)?.toString(),
+      ...(isExternal !== false && {
+        target: '_blank',
+        rel: 'noopener noreferrer'
+      })
+    };
 
-      return <a {...props}>{children}</a>;
-    }
-
-    return <>{children}</>;
+    return <a {...props}>{children}</a>;
   }
 
   return (
