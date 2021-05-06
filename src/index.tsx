@@ -10,6 +10,8 @@ import {
 import { LinkingComponent, external, Url } from './LinkingComponent';
 import { LinkProps, LinkButtonProps, LinkButtonIconProps } from './types';
 
+export { LinkProps, LinkButtonProps, LinkButtonIconProps };
+
 const useIsActive = (href?: string) => {
   const router = useRouter();
 
