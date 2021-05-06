@@ -1,7 +1,7 @@
 import {
-  LinkProps as ChakraLinkProps,
   ButtonProps as ChakraButtonProps,
-  IconButtonProps as ChakraButtonIconProps
+  IconButtonProps as ChakraButtonIconProps,
+  LinkProps as ChakraLinkProps
 } from '@chakra-ui/react';
 import { LinkProps as NextLinkProps } from 'next/link';
 
@@ -19,7 +19,8 @@ type ChakraSpecific = {
   noUnderline?: boolean;
 };
 
-type Props<T> = BaseProps & ((ChakraSpecific & T) | JustLink);
+type Props<T> = BaseProps &
+  ((ChakraSpecific & T) | JustLink) & { noUnderline?: boolean };
 
 export type LinkProps = Props<ChakraLinkProps>;
 export type LinkButtonProps = ChakraButtonProps & ChakraSpecific & BaseProps;

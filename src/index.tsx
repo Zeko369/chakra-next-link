@@ -32,7 +32,15 @@ const asHelper = (
 };
 
 export const Link: React.FC<LinkProps> = (props) => {
-  const { nextAs, href, children, linkProps, justLink, ...rest } = props;
+  const {
+    nextAs,
+    href,
+    children,
+    linkProps,
+    justLink,
+    noUnderline,
+    ...rest
+  } = props;
   const isActive = useIsActive(href);
 
   return (
@@ -50,7 +58,7 @@ export const Link: React.FC<LinkProps> = (props) => {
           as={asHelper(href)}
           href={href}
           isExternal={(rest as any).isExternal || (!nextAs && external(href))}
-          {...((rest as any).noUnderline && {
+          {...(noUnderline && {
             _hover: {
               textDecoration: 'none !important'
             }
