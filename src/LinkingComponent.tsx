@@ -15,10 +15,15 @@ export interface LinkingComponentProps extends Omit<LinkProps, 'href'> {
   href?: Url;
   justLink?: boolean;
   isExternal?: boolean;
+  isDisabled?: boolean;
 }
 
 export const LinkingComponent: React.FC<LinkingComponentProps> = (props) => {
-  const { as, href, children, justLink, isExternal } = props;
+  const { as, href, children, justLink, isExternal, isDisabled } = props;
+
+  if (isDisabled) {
+    return <>{children}</>;
+  }
 
   if (href === undefined || (!as && external(href)) || isExternal) {
     const props = {

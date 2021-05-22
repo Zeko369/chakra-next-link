@@ -44,6 +44,11 @@ const Home: NextPage = () => {
         label="This is just a button link"
         other={{ onClick: () => alert('click') }}
       />
+      <Row
+        label="This is disabled"
+        href="/other"
+        other={{ isDisabled: true }}
+      />
 
       <Heading size="md">{`IsExternal prop => [o -> /other, g -> https://google.com]`}</Heading>
       <Row label="/o1" href="/other" other={{ isExternal: true }} />

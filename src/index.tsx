@@ -40,6 +40,7 @@ export const Link: React.FC<LinkProps> = (props) => {
     children,
     linkProps,
     justLink,
+    isDisabled,
     noUnderline,
     ...rest
   } = props;
@@ -51,22 +52,26 @@ export const Link: React.FC<LinkProps> = (props) => {
       as={nextAs}
       justLink={justLink}
       isExternal={(rest as any).isExternal}
+      isDisabled={isDisabled}
       {...linkProps}
     >
       {justLink ? (
         children
       ) : (
         <ChakraLink
-          as={asHelper(href)}
-          href={href}
-          isExternal={(rest as any).isExternal || (!nextAs && external(href))}
           {...(noUnderline && {
+            _hover: { textDecoration: 'none !important' }
+          })}
+          isExternal={(rest as any).isExternal || (!nextAs && external(href))}
+          {...(isDisabled && {
+            cursor: 'not-allowed',
+            opacity: '0.4',
             _hover: {
-              textDecoration: 'none !important'
+              textDecoration: 'none'
             }
           })}
-          {...rest}
           aria-current={isActive ? 'page' : undefined}
+          {...rest}
         >
           {children}
         </ChakraLink>
@@ -76,7 +81,15 @@ export const Link: React.FC<LinkProps> = (props) => {
 };
 
 export const LinkButton: React.FC<LinkButtonProps> = (props) => {
-  const { nextAs, href, children, linkProps, isExternal, ...rest } = props;
+  const {
+    nextAs,
+    href,
+    children,
+    isDisabled,
+    linkProps,
+    isExternal,
+    ...rest
+  } = props;
   const isActive = useIsActive(href);
 
   return (
@@ -84,11 +97,13 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
       isExternal={isExternal}
       href={href}
       as={nextAs}
+      isDisabled={isDisabled}
       {...linkProps}
     >
       <Button
         as={asHelper(href)}
         aria-current={isActive ? 'page' : undefined}
+        isDisabled={isDisabled}
         {...rest}
       >
         {children}
@@ -98,7 +113,15 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
 };
 
 export const LinkIconButton: React.FC<LinkButtonIconProps> = (props) => {
-  const { nextAs, href, children, linkProps, isExternal, ...rest } = props;
+  const {
+    nextAs,
+    href,
+    children,
+    isDisabled,
+    linkProps,
+    isExternal,
+    ...rest
+  } = props;
   const isActive = useIsActive(href);
 
   return (
@@ -106,12 +129,14 @@ export const LinkIconButton: React.FC<LinkButtonIconProps> = (props) => {
       isExternal={isExternal}
       href={href}
       as={nextAs}
+      isDisabled={isDisabled}
       {...linkProps}
     >
       <IconButton
         as={asHelper(href)}
         // ADD DISABLED
         aria-current={isActive ? 'page' : undefined}
+        isDisabled={isDisabled}
         {...rest}
       >
         {children}

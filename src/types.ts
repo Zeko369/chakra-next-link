@@ -14,13 +14,15 @@ export type BaseProps = {
 
 type JustLink = { justLink: true };
 type ChakraSpecific = {
-  isDisabled?: boolean;
   justLink?: false;
   noUnderline?: boolean;
 };
 
 type Props<T> = BaseProps &
-  ((ChakraSpecific & T) | JustLink) & { noUnderline?: boolean };
+  ((ChakraSpecific & T) | JustLink) & {
+    noUnderline?: boolean;
+    isDisabled?: boolean;
+  };
 
 export type LinkProps = Props<ChakraLinkProps>;
 export type LinkButtonProps = ChakraButtonProps & ChakraSpecific & BaseProps;
