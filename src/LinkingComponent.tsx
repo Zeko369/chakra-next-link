@@ -1,6 +1,7 @@
 import React from 'react';
 import NextLink, { LinkProps } from 'next/link';
 import { UrlObject } from 'url';
+import { useRouter } from 'next/router';
 
 export type Url = string | UrlObject;
 export const external = (url?: Url) => {
@@ -20,6 +21,13 @@ export interface LinkingComponentProps extends Omit<LinkProps, 'href'> {
 
 export const LinkingComponent: React.FC<LinkingComponentProps> = (props) => {
   const { as, href, children, justLink, isExternal, isDisabled } = props;
+
+  const router = useRouter();
+
+  let newHref = href?.toString();
+  if (newHref?.startsWith('./')) {
+    newHref = `${router.asPath}/${newHref.slice(2)}`;
+  }
 
   if (isDisabled) {
     return <>{children}</>;
