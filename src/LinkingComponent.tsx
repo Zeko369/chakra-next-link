@@ -46,7 +46,8 @@ export const LinkingComponent: React.FC<LinkingComponentProps> = (props) => {
   }
 
   return (
-    <NextLink href={href} as={as} passHref={!justLink}>
+    // TODO: Fix this
+    <NextLink href={newHref as any} as={as} passHref={!justLink}>
       {children}
     </NextLink>
   );
