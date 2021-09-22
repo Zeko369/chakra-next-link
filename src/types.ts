@@ -10,6 +10,7 @@ export type BaseProps = {
   href?: string;
   nextAs?: string;
   isExternal?: boolean;
+  nativeAnchor?: boolean;
 };
 
 type JustLink = { justLink: true };

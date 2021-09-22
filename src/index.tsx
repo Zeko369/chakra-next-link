@@ -42,6 +42,7 @@ export const Link: React.FC<LinkProps> = (props) => {
     justLink,
     isDisabled,
     noUnderline,
+    nativeAnchor,
     ...rest
   } = props;
   const isActive = useIsActive(href);
@@ -53,6 +54,7 @@ export const Link: React.FC<LinkProps> = (props) => {
       justLink={justLink}
       isExternal={(rest as any).isExternal}
       isDisabled={isDisabled}
+      nativeAnchor={nativeAnchor}
       {...linkProps}
     >
       {justLink ? (
@@ -88,6 +90,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
     isDisabled,
     linkProps,
     isExternal,
+    nativeAnchor,
     ...rest
   } = props;
   const isActive = useIsActive(href);
@@ -98,6 +101,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
       href={href}
       as={nextAs}
       isDisabled={isDisabled}
+      nativeAnchor={nativeAnchor}
       {...linkProps}
     >
       <Button
@@ -120,6 +124,7 @@ export const LinkIconButton: React.FC<LinkButtonIconProps> = (props) => {
     isDisabled,
     linkProps,
     isExternal,
+    nativeAnchor,
     ...rest
   } = props;
   const isActive = useIsActive(href);
@@ -130,6 +135,7 @@ export const LinkIconButton: React.FC<LinkButtonIconProps> = (props) => {
       href={href}
       as={nextAs}
       isDisabled={isDisabled}
+      nativeAnchor={nativeAnchor}
       {...linkProps}
     >
       <IconButton
