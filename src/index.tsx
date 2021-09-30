@@ -95,6 +95,20 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
   } = props;
   const isActive = useIsActive(href);
 
+  if (nativeAnchor) {
+    return (
+      <Button
+        as={asHelper(href)}
+        href={href}
+        aria-current={isActive ? 'page' : undefined}
+        isDisabled={isDisabled}
+        {...rest}
+      >
+        {children}
+      </Button>
+    );
+  }
+
   return (
     <LinkingComponent
       isExternal={isExternal}
