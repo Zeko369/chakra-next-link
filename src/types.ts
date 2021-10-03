@@ -13,20 +13,19 @@ export type BaseProps = {
   nativeAnchor?: boolean;
 };
 
-type JustLink = { justLink: true };
 type ChakraSpecific = {
   justLink?: false;
   noUnderline?: boolean;
 };
 
-type Props<T> = BaseProps &
-  ((ChakraSpecific & T) | JustLink) & {
+type AddOr<Children, Cond, Or> = Cond extends true ? Or | Children : Children;
+type Props<T, HasJustLink = false> = BaseProps &
+  AddOr<T & ChakraSpecific, HasJustLink, { justLink: true }> & {
     noUnderline?: boolean;
     isDisabled?: boolean;
   };
 
-export type LinkProps = Props<ChakraLinkProps>;
-export type LinkButtonProps = ChakraButtonProps & ChakraSpecific & BaseProps;
-export type LinkButtonIconProps = ChakraButtonIconProps &
-  ChakraSpecific &
-  BaseProps;
+export type LinkProps = Props<ChakraLinkProps, true>;
+export type ActiveLinkProps = Props<ChakraLinkProps>;
+export type LinkButtonProps = Props<ChakraButtonProps>;
+export type LinkButtonIconProps = Props<ChakraButtonIconProps>;

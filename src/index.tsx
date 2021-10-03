@@ -8,11 +8,16 @@ import {
 } from '@chakra-ui/react';
 
 import { LinkingComponent, external, Url } from './LinkingComponent';
-import { LinkProps, LinkButtonProps, LinkButtonIconProps } from './types';
+import {
+  LinkProps,
+  LinkButtonProps,
+  LinkButtonIconProps,
+  ActiveLinkProps
+} from './types';
 
 export { LinkProps, LinkButtonProps, LinkButtonIconProps };
 
-const useIsActive = (href?: string) => {
+export const useIsCurrentUrl = (href?: string) => {
   const router = useRouter();
 
   if (!href) {
@@ -45,7 +50,7 @@ export const Link: React.FC<LinkProps> = (props) => {
     nativeAnchor,
     ...rest
   } = props;
-  const isActive = useIsActive(href);
+  const isActive = useIsCurrentUrl(href);
 
   return (
     <LinkingComponent
@@ -82,6 +87,19 @@ export const Link: React.FC<LinkProps> = (props) => {
   );
 };
 
+export const ActiveLink: React.FC<ActiveLinkProps> = (props) => {
+  return (
+    <Link
+      {...props}
+      _activeLink={
+        props._activeLink || {
+          fontWeight: 'bold'
+        }
+      }
+    />
+  );
+};
+
 export const LinkButton: React.FC<LinkButtonProps> = (props) => {
   const {
     nextAs,
@@ -93,7 +111,7 @@ export const LinkButton: React.FC<LinkButtonProps> = (props) => {
     nativeAnchor,
     ...rest
   } = props;
-  const isActive = useIsActive(href);
+  const isActive = useIsCurrentUrl(href);
 
   if (nativeAnchor) {
     return (
@@ -141,7 +159,7 @@ export const LinkIconButton: React.FC<LinkButtonIconProps> = (props) => {
     nativeAnchor,
     ...rest
   } = props;
-  const isActive = useIsActive(href);
+  const isActive = useIsCurrentUrl(href);
 
   return (
     <LinkingComponent
