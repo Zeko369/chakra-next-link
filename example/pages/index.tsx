@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Heading, HStack, VStack, Text } from '@chakra-ui/react';
+import { Box, Heading, HStack, Text, VStack } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { NextPage } from 'next';
 
-import { Link, LinkButton, LinkIconButton } from '../../dist';
+import { ActiveLink, Link, LinkButton, LinkIconButton } from '../../dist';
 
 const Row: React.FC<{ href?: string; label: string; other?: any }> = ({
   href,
@@ -15,6 +15,9 @@ const Row: React.FC<{ href?: string; label: string; other?: any }> = ({
       <Link href={href} {...other}>
         {label}
       </Link>
+      <ActiveLink href={href} {...other}>
+        (active) {label}
+      </ActiveLink>
       <LinkButton href={href} {...other}>
         {label}
       </LinkButton>
@@ -50,7 +53,12 @@ const Home: NextPage = () => {
         other={{ isDisabled: true }}
       />
 
-      <Heading size="md">{`IsExternal prop => [o -> /other, g -> https://google.com]`}</Heading>
+      <Heading>
+        {
+          'Mention difference with official next routing when doing relative stuff ./'
+        }
+      </Heading>
+
       <Row label="/o1" href="/other" other={{ isExternal: true }} />
       <Row label="/g1" href="https://google.com" other={{ isExternal: true }} />
       <Row label="/o0" href="/other" other={{ isExternal: !1 }} />
@@ -76,6 +84,8 @@ const Home: NextPage = () => {
             <Heading size="sm">Google but same tab</Heading>
           </Box>
         </Link>
+
+        <Heading size="md">{`IsExternal prop => [o -> /other, g -> https://google.com]`}</Heading>
       </HStack>
     </VStack>
   );
