@@ -31,4 +31,6 @@ type Props<T, HasJustLink = false> = BaseProps &
 export type LinkProps = Props<ChakraLinkProps, true>;
 export type ActiveLinkProps = Props<ChakraLinkProps>;
 export type LinkButtonProps = Props<ChakraButtonProps>;
-export type LinkButtonIconProps = Props<ChakraButtonIconProps>;
+export type LinkButtonIconProps = Props<ChakraButtonIconProps> & {
+  children?: ReactNode;
+};

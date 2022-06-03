@@ -14,7 +14,7 @@ jest.mock('next/router', () => ({
 }));
 
 describe('it', () => {
-  const baseProps = { href: '/foo' };
+  const baseProps = { href: '/foo', children: 'foobar' };
 
   it('renders Link without crashing', () => {
     const div = document.createElement('div');
