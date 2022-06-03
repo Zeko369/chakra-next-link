@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import {
   ButtonProps as ChakraButtonProps,
   IconButtonProps as ChakraButtonIconProps,
@@ -11,6 +12,8 @@ export type BaseProps = {
   nextAs?: string;
   isExternal?: boolean;
   nativeAnchor?: boolean;
+
+  children: ReactNode;
 };
 
 type ChakraSpecific = {
